@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0d0e12" />
+    <title>Mantenimiento Industrial 3D</title>
+
+    <!-- Fuentes Premium de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Importar el componente de Google Model Viewer para 3D -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+    <!-- PWA Setup -->
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="app-container">
+
+        <!-- PANTALLA PRINCIPAL (MENÚ) -->
+        <section id="screen-menu" class="screen active-screen">
+            <header class="app-header">
+                <div class="logo">
+                    <img src="logo.ico" alt="Logo Institucional"
+                        style="width: 38px; height: 38px; border-radius: 8px; object-fit: contain;">
+                    <h1>SYS<span class="highlight">MAINTENANCE</span></h1>
+                </div>
+                <p class="subtitle">Panel Procedimientos de Mantenimiento de Armamento</p>
+            </header>
+
+            <div class="menu-grid">
+                <button class="menu-card" data-target="procedure-1">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="22" y1="12" x2="18" y2="12" />
+                            <line x1="6" y1="12" x2="2" y2="12" />
+                            <line x1="12" y1="6" x2="12" y2="2" />
+                            <line x1="12" y1="22" x2="12" y2="18" />
+                        </svg></div>
+                    <div class="card-content">
+                        <h3>1. Fusil Fx</h3>
+                        <p>Desarme parcial FX05</p>
+                    </div>
+                </button>
+                <button class="menu-card" data-target="procedure-2">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <polyline points="9 12 11 14 15 10" />
+                        </svg></div>
+                    <div class="card-content">
+                        <h3>2. AR-15</h3>
+                        <p>Desarme AR15</p>
+                    </div>
+                </button>
+                <button class="menu-card" data-target="procedure-3">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg></div>
+                    <div class="card-content">
+                        <h3>3. HKG3</h3>
+                        <p>Mantenimiento y desarme</p>
+                    </div>
+                </button>
+                <button class="menu-card" data-target="procedure-4">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg></div>
+                    <div class="card-content">
+                        <h3>4. MINIMI MK3</h3>
+                        <p>Revisión y mantenimiento</p>
+                    </div>
+                </button>
+                <button class="menu-card" data-target="procedure-5">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M12 7v-4" />
+                            <path d="M12 21v-4" />
+                            <path d="M16.33 9.5l3.46 -2" />
+                            <path d="M4.21 16.5l3.46 -2" />
+                            <path d="M16.33 14.5l3.46 2" />
+                            <path d="M4.21 7.5l3.46 2" />
+                        </svg></div>
+                    <div class="card-content">
+                        <h3>5. MK19</h3>
+                        <p>Desarme parcial MK19</p>
+                    </div>
+                </button>
+
+                <!-- SECCIÓN MATERIAL ADICIONAL -->
+                <div class="additional-materials">
+                    <h3 class="section-title">Material Adicional o de Apoyo</h3>
+                    <div class="materials-list">
+                        <a href="AR 15.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Manual AR-15
+                        </a>
+                        <a href="ATLAS FX 05.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Atlas FX-05
+                        </a>
+                        <a href="FX 05.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Manual FX-05
+                        </a>
+                        <a href="FUSIL G3.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Manual Fusil G3
+                        </a>
+                        <a href="minimi-762x51-mm-.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Manual MINIMI 7.62
+                        </a>
+                        <a href="Manual de ametralladora MK19.pdf" target="_blank" class="material-link">
+                            <div class="material-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            Manual MK19
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLAS DE PROCEDIMIENTOS (Se rellenan dinámicamente) -->
+        <section id="screen-procedure" class="screen">
+            <!-- Barra superior para volver -->
+            <nav class="proc-nav">
+                <button id="btn-back" class="btn-back">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Atrás
+                </button>
+                <h2 id="proc-title">Procedimiento</h2>
+            </nav>
+
+            <!-- Renderizador 3D -->
+            <div class="viewer-container">
+                <model-viewer id="main-3d-viewer" src="" alt="Modelo 3D" auto-rotate camera-controls
+                    shadow-intensity="1" exposure="1.2" environment-image="neutral" interaction-prompt="none">
+                </model-viewer>
+                <div class="gradient-overlay"></div>
+            </div>
+
+            <!-- Instrucciones de Mantenimiento -->
+            <div class="instructions-panel">
+                <div class="panel-handle"></div>
+                <div id="proc-details" class="details-content">
+                    <!-- Contenido inyectado por JS -->
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
