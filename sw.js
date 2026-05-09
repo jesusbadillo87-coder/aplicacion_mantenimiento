@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v3';
+const CACHE_NAME = 'maint3d-v4';
 const urlsToCache = [
   './',
   './index.html',
@@ -6,7 +6,8 @@ const urlsToCache = [
   './app.js',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './Logo.ico'
 ];
 
 // Instalar el Service Worker
@@ -36,6 +37,13 @@ self.addEventListener('activate', event => {
 
 // Interceptar peticiones (Fetch)
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  
+  // EXCLUSIÓN: No cachear modelos 3D ni PDFs pesados para evitar errores de memoria en el móvil
+  if (url.pathname.endsWith('.glb') || url.pathname.endsWith('.pdf') || url.pathname.endsWith('.zip')) {
+    return; // Dejar que el navegador lo maneje normalmente (Network Only)
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
