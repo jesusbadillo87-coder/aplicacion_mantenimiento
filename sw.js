@@ -1,10 +1,12 @@
-const CACHE_NAME = 'maint3d-v2';
+const CACHE_NAME = 'maint3d-v3';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // Instalar el Service Worker
