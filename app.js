@@ -127,9 +127,75 @@ const proceduresData = {
         modelSrc: 'hkg3.glb?v=5',
         categories: [
             {
-                name: "Pendiente",
+                name: "Desarme 1/er escalón",
                 steps: [
-                    { title: 'Pendiente', desc: 'Por favor, proporciona los pasos para el HKG3.' }
+                    { title: '1. Selector de tiro y seguro', desc: 'Colocar el selector de cadencia en posición de seguro “S”.' },
+                    { title: '2. Verificación de recámara', desc: 'Realizar las medidas de seguridad y verificar que no exista cartucho en la recámara.' },
+                    { title: '3. Cargador', desc: 'Presionar la retenida del cargador hacia adelante y hacia afuera para desmontarlo del arma.' },
+                    { title: '4. Portafusil', desc: 'Retirar el portafusil desenganchándolo de la anilleta.' },
+                    { title: '5. Pernos de sujeción de la caja de fijación', desc: 'Retirar los pernos de sujeción de la caja de fijación y alojarlos en los remaches huecos de la culata.' },
+                    { title: '6. Caja de fijación y culata', desc: 'Retirar la caja de fijación junto con la culata y separarla del arma.' },
+                    { title: '7. Empuñadura', desc: 'Mover la empuñadura hacia abajo para facilitar su desmontaje.' },
+                    { title: '8. Perno de fijación de la empuñadura', desc: 'Sacar el perno de fijación y separar la empuñadura del arma.' },
+                    { title: '9. Cerrojo', desc: 'Retirar el cerrojo utilizando la palanca de maniobras y extraerlo del cajón de mecanismos.' },
+                    { title: '10. Palanca de maniobras', desc: 'Empujar la palanca de maniobras hacia adelante hasta su posición inicial.' },
+                    { title: '11. Perno de sujeción del guardamano', desc: 'Retirar el perno de sujeción del guardamano.' },
+                    { title: '12. Guardamano', desc: 'Desmontar el guardamano basculándolo desde la parte superior y jalándolo hacia arriba.' }
+                ]
+            },
+            {
+                name: "Arme 1/er. Escalón",
+                steps: [
+                    { title: '1. Guardamano', desc: 'Colocar el guardamano en su posición basculándolo hacia el arma hasta ajustarlo correctamente.' },
+                    { title: '2. Perno de sujeción del guardamano', desc: 'Insertar el perno de sujeción para asegurar el guardamano.' },
+                    { title: '3. Palanca de maniobras', desc: 'Verificar que la palanca de maniobras se encuentre en su posición hacia adelante.' },
+                    { title: '4. Cerrojo', desc: 'Insertar el cerrojo utilizando la palanca de maniobras hasta colocarlo en el cajón de mecanismos.' },
+                    { title: '5. Empuñadura', desc: 'Colocar la empuñadura alineándola correctamente con el arma.' },
+                    { title: '6. Perno de fijación de la empuñadura', desc: 'Insertar el perno de fijación para asegurar la empuñadura.' },
+                    { title: '7. Caja de fijación y culata', desc: 'Colocar la caja de fijación junto con la culata en su posición correspondiente.' },
+                    { title: '8. Pernos de sujeción de la caja de fijación', desc: 'Insertar los pernos de sujeción asegurando correctamente la caja de fijación.' },
+                    { title: '9. Portafusil', desc: 'Instalar el portafusil enganchándolo en la anilleta.' },
+                    { title: '10. Cargador', desc: 'Insertar el cargador en el arma hasta asegurar su fijación.' },
+                    { title: '11. Verificación de funcionamiento', desc: 'Jalar la palanca de maniobras hacia atrás y comprobar el correcto funcionamiento del arma.' }
+                ]
+            },
+            {
+                name: "Desarme 2/o escalón",
+                steps: [
+                    { title: '1. Selector de tiro y seguro', desc: 'Colocar el selector de cadencia en posición de seguro “S”.' },
+                    { title: '2. Verificación de recámara', desc: 'Realizar las medidas de seguridad y verificar que no exista cartucho en la recámara.' },
+                    { title: '3. Cargador', desc: 'Presionar la retenida del cargador hacia adelante y hacia afuera para desmontarlo del arma.' },
+                    { title: '4. Portafusil', desc: 'Retirar el portafusil desenganchándolo de la anilleta.' },
+                    { title: '5. Pernos de sujeción de la caja de fijación', desc: 'Retirar los pernos de sujeción de la caja de fijación y alojarlos en los remaches huecos de la culata.' },
+                    { title: '6. Caja de fijación y culata', desc: 'Retirar la caja de fijación junto con la culata y separarla del arma.' },
+                    { title: '7. Empuñadura', desc: 'Mover la empuñadura hacia abajo para facilitar su desmontaje.' },
+                    { title: '8. Perno de fijación de la empuñadura', desc: 'Sacar el perno de fijación y separar la empuñadura del arma.' },
+                    { title: '9. Cerrojo', desc: 'Retirar el cerrojo utilizando la palanca de maniobras y extraerlo del cajón de mecanismos.' },
+                    { title: '10. Palanca de maniobras', desc: 'Empujar la palanca de maniobras hacia adelante hasta su posición inicial.' },
+                    { title: '11. Perno de sujeción del guardamano', desc: 'Retirar el perno de sujeción del guardamano.' },
+                    { title: '12. Guardamano', desc: 'Desmontar el guardamano basculándolo desde la parte superior y jalándolo hacia arriba.' },
+                    { title: '13. Cantonera', desc: 'Introducir un desarmador de boca ancha en la junta de unión de la cantonera y golpear ligeramente hasta que penetre en la unión; girar ligeramente el desarmador y jalar la cantonera hacia atrás de la culata, liberando la presión de las muelles de fijación.' },
+                    { title: '14. Tornillos de la caja del amortiguador', desc: 'Desmontar los tornillos de la caja del amortiguador utilizando la herramienta adecuada.' },
+                    { title: '15. Tornillo de fijación del amortiguador', desc: 'Destornillar el tornillo de fijación del amortiguador con un desarmador apropiado y separar el conjunto.' }
+                ]
+            },
+            {
+                name: "Arme 2/o. Escalón",
+                steps: [
+                    { title: '1. Tornillo de fijación del amortiguador', desc: 'Colocar el amortiguador en su posición e insertar el tornillo de fijación, asegurándolo firmemente.' },
+                    { title: '2. Tornillos de la caja del amortiguador', desc: 'Instalar y apretar firmemente los tornillos de la caja del amortiguador.' },
+                    { title: '3. Cantonera', desc: 'Colocar la cantonera en la culata presionándola hasta que las muelles de fijación queden aseguradas en su alojamiento.' },
+                    { title: '4. Guardamano', desc: 'Colocar el guardamano en su posición basculándolo hacia el arma hasta ajustarlo correctamente.' },
+                    { title: '5. Perno de sujeción del guardamano', desc: 'Insertar el perno de sujeción para asegurar el guardamano.' },
+                    { title: '6. Palanca de maniobras', desc: 'Verificar que la palanca de maniobras se encuentre en su posición hacia adelante.' },
+                    { title: '7. Cerrojo', desc: 'Insertar el cerrojo utilizando la palanca de maniobras hasta colocarlo en el cajón de mecanismos.' },
+                    { title: '8. Empuñadura', desc: 'Colocar la empuñadura alineándola correctamente con el arma.' },
+                    { title: '9. Perno de fijación de la empuñadura', desc: 'Insertar el perno de fijación para asegurar la empuñadura.' },
+                    { title: '10. Caja de fijación y culata', desc: 'Colocar la caja de fijación junto con la culata en su posición correspondiente.' },
+                    { title: '11. Pernos de sujeción de la caja de fijación', desc: 'Insertar los pernos de sujeción asegurando correctamente la caja de fijación.' },
+                    { title: '12. Portafusil', desc: 'Instalar el portafusil enganchándolo en la anilleta.' },
+                    { title: '13. Cargador', desc: 'Insertar el cargador en el arma hasta asegurar su fijación.' },
+                    { title: '14. Verificación de funcionamiento', desc: 'Jalar la palanca de maniobras hacia atrás y comprobar el correcto funcionamiento del arma.' }
                 ]
             }
         ],
