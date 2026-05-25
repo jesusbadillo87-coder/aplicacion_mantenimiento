@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v4';
+const CACHE_NAME = 'maint3d-v8';
 const urlsToCache = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const urlsToCache = [
 
 // Instalar el Service Worker
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -22,6 +23,7 @@ self.addEventListener('install', event => {
 
 // Activar y limpiar cachés antiguos
 self.addEventListener('activate', event => {
+  event.waitUntil(clients.claim());
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
