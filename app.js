@@ -410,11 +410,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.material-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault(); // Evitar comportamiento predeterminado
-            const pdfUrl = encodeURI(link.getAttribute('href'));
-            const title = link.textContent.trim();
+            const rawHref = link.getAttribute('href');
             
+            // Crear una URL absoluta para que el visor de PDF.js pueda accederla (funciona en GitHub Pages)
+            const absoluteUrl = new URL(rawHref, window.location.href).href;
+            
+            const title = link.textContent.trim();
             pdfModalTitle.textContent = title;
-            pdfViewer.src = pdfUrl;
+            
+            // Usar el visor oficial de PDF.js de Mozilla (soluciona el problema de Android que no muestra PDFs en iframes)
+            pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(absoluteUrl)}`;
+            
             pdfModal.classList.add('active');
         });
     });
