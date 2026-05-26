@@ -410,17 +410,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.material-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault(); // Evitar comportamiento predeterminado
-            const rawHref = link.getAttribute('href');
-            
-            // Crear una URL absoluta para que el visor de PDF.js pueda accederla (funciona en GitHub Pages)
-            const absoluteUrl = new URL(rawHref, window.location.href).href;
-            
+            const pdfUrl = encodeURI(link.getAttribute('href'));
             const title = link.textContent.trim();
+            
             pdfModalTitle.textContent = title;
+            pdfViewer.src = pdfUrl;
             
-            // Usar el visor oficial de PDF.js de Mozilla (soluciona el problema de Android que no muestra PDFs en iframes)
-            pdfViewer.src = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(absoluteUrl)}`;
-            
+            // Botón de fallback para móviles que no soportan iframe PDF
+            let extBtn = document.getElementById('btn-external-pdf');
+            if (!extBtn) {
+                extBtn = document.createElement('a');
+                extBtn.id = 'btn-external-pdf';
+                extBtn.className = 'btn-close-pdf'; // Reusar estilo
+                extBtn.style.width = 'auto';
+                extBtn.style.padding = '0 10px';
+                extBtn.style.fontSize = '14px';
+                extBtn.style.textDecoration = 'none';
+                extBtn.innerHTML = 'Abrir ↗';
+                extBtn.target = '_blank';
+                document.querySelector('.pdf-modal-header').insertBefore(extBtn, btnClosePdf);
+            }
+            extBtn.href = pdfUrl;
+
             pdfModal.classList.add('active');
         });
     });
