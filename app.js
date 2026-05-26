@@ -400,4 +400,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         procDetails.innerHTML = htmlContent;
     }
+
+    // Modal para PDFs
+    const pdfModal = document.getElementById('pdf-modal');
+    const pdfViewer = document.getElementById('pdf-viewer');
+    const btnClosePdf = document.getElementById('btn-close-pdf');
+    const pdfModalTitle = document.getElementById('pdf-modal-title');
+
+    document.querySelectorAll('.material-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Evitar comportamiento predeterminado
+            const pdfUrl = encodeURI(link.getAttribute('href'));
+            const title = link.textContent.trim();
+            
+            pdfModalTitle.textContent = title;
+            pdfViewer.src = pdfUrl;
+            pdfModal.classList.add('active');
+        });
+    });
+
+    btnClosePdf.addEventListener('click', () => {
+        pdfModal.classList.remove('active');
+        // Esperamos un momento a que termine la animación para borrar el src
+        setTimeout(() => {
+            pdfViewer.src = '';
+        }, 300);
+    });
 });
