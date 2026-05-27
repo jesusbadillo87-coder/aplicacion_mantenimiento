@@ -35,6 +35,7 @@ try {
                     ".webp" { $response.ContentType = "image/webp" }
                     ".jpg"  { $response.ContentType = "image/jpeg" }
                     ".pdf"  { $response.ContentType = "application/pdf" }
+                    ".mp4"  { $response.ContentType = "video/mp4" }
                     default { $response.ContentType = "application/octet-stream" }
                 }
                 

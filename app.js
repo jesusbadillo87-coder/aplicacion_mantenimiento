@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pdfModalTitle.textContent = title;
             pdfViewer.src = pdfUrl;
             
-            // Botón de fallback para móviles que no soportan iframe PDF
+    // Botón de fallback para móviles que no soportan iframe PDF
             let extBtn = document.getElementById('btn-external-pdf');
             if (!extBtn) {
                 extBtn = document.createElement('a');
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 extBtn.style.textDecoration = 'none';
                 extBtn.innerHTML = 'Abrir ↗';
                 extBtn.target = '_blank';
-                document.querySelector('.pdf-modal-header').insertBefore(extBtn, btnClosePdf);
+                document.querySelector('#pdf-modal .pdf-modal-header').insertBefore(extBtn, btnClosePdf);
             }
             extBtn.href = pdfUrl;
 
@@ -438,9 +438,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnClosePdf.addEventListener('click', () => {
         pdfModal.classList.remove('active');
-        // Esperamos un momento a que termine la animación para borrar el src
         setTimeout(() => {
             pdfViewer.src = '';
+        }, 300);
+    });
+
+    // Modal para Videos
+    const videoModal = document.getElementById('video-modal');
+    const videoViewer = document.getElementById('video-viewer');
+    const btnCloseVideo = document.getElementById('btn-close-video');
+    const videoModalTitle = document.getElementById('video-modal-title');
+
+    document.querySelectorAll('.video-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            e.stopPropagation(); // Evitar que el evento dispare el del PDF si se mezclan
+            
+            const videoUrl = encodeURI(link.getAttribute('href'));
+            const title = link.textContent.trim();
+            
+            videoModalTitle.textContent = title;
+            videoViewer.src = videoUrl;
+            videoModal.classList.add('active');
+            videoViewer.play().catch(e => console.log('Auto-play prevent:', e));
+        });
+    });
+
+    btnCloseVideo.addEventListener('click', () => {
+        videoModal.classList.remove('active');
+        videoViewer.pause();
+        setTimeout(() => {
+            videoViewer.src = '';
         }, 300);
     });
 });

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v10';
+const CACHE_NAME = 'maint3d-v11';
 const urlsToCache = [
   './',
   './index.html',
@@ -41,8 +41,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // EXCLUSIÓN: No cachear modelos 3D ni PDFs pesados para evitar errores de memoria en el móvil
-  if (url.pathname.endsWith('.glb') || url.pathname.endsWith('.pdf') || url.pathname.endsWith('.zip')) {
+  // EXCLUSIÓN: No cachear modelos 3D, videos ni PDFs pesados para evitar errores de memoria en el móvil
+  if (url.pathname.endsWith('.glb') || url.pathname.endsWith('.pdf') || url.pathname.endsWith('.zip') || url.pathname.endsWith('.mp4')) {
     return; // Dejar que el navegador lo maneje normalmente (Network Only)
   }
 
