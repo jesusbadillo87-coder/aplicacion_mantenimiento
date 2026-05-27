@@ -2,7 +2,7 @@
 const proceduresData = {
     'procedure-1': {
         title: 'Fusil Fx',
-        modelSrc: 'fusil_fx.glb?v=6',
+        modelSrc: 'fusil_fx.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -87,7 +87,7 @@ const proceduresData = {
     },
     'procedure-2': {
         title: 'AR-15',
-        modelSrc: 'ar-15_assault_rifle_fbx.glb?v=6',
+        modelSrc: 'ar-15_assault_rifle_fbx.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -124,7 +124,7 @@ const proceduresData = {
     },
     'procedure-3': {
         title: 'HKG3',
-        modelSrc: 'hkg3.glb?v=6',
+        modelSrc: 'hkg3.glb',
         categories: [
             {
                 name: "Desarme 1/er escalón",
@@ -203,7 +203,7 @@ const proceduresData = {
     },
     'procedure-4': {
         title: 'MINIMI MK3',
-        modelSrc: 'Minimi-Mk3-Black.glb?v=6',
+        modelSrc: 'Minimi-Mk3-Black.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -240,7 +240,7 @@ const proceduresData = {
     },
     'procedure-5': {
         title: 'MK19',
-        modelSrc: 'MK19.glb?v=6',
+        modelSrc: 'MK19.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v12';
+const CACHE_NAME = 'maint3d-v13';
 const urlsToCache = [
   './',
   './index.html',
@@ -7,7 +7,9 @@ const urlsToCache = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
-  './Logo.ico'
+  './Logo.ico',
+  './pdf.min.js',
+  './pdf.worker.min.js'
 ];
 
 // Instalar el Service Worker
