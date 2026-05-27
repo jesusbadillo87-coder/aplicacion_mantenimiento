@@ -17,6 +17,12 @@
     <!-- Importar el componente de Google Model Viewer para 3D -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
+    <!-- PDF.js para visualizar PDFs en cualquier dispositivo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+
     <!-- PWA Setup -->
     <link rel="manifest" href="manifest.json">
     <script>
@@ -345,8 +351,13 @@
             <h3 id="pdf-modal-title">Visor de Documento</h3>
             <button id="btn-close-pdf" class="btn-close-pdf">&times;</button>
         </div>
-        <div class="pdf-modal-body">
-            <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+        <div class="pdf-modal-body pdf-canvas-container" id="pdf-render-container">
+            <div class="pdf-controls">
+                <button id="pdf-prev" class="pdf-btn">Anterior</button>
+                <span class="pdf-page-info"><span id="pdf-page-num">1</span> / <span id="pdf-page-count">-</span></span>
+                <button id="pdf-next" class="pdf-btn">Siguiente</button>
+            </div>
+            <canvas id="pdf-canvas"></canvas>
         </div>
     </div>
 

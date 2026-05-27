@@ -703,8 +703,53 @@ model-viewer {
     background: #fff;
 }
 
-.pdf-modal-body iframe {
+.pdf-canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    background: #121212;
+    padding: 15px;
+}
+.pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: #1e1e1e;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     width: 100%;
-    height: 100%;
+    max-width: 400px;
+    flex-shrink: 0;
+}
+.pdf-btn {
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+.pdf-btn:disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+}
+.pdf-page-info {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+#pdf-canvas {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    background: white;
 }

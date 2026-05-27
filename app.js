@@ -2,7 +2,7 @@
 const proceduresData = {
     'procedure-1': {
         title: 'Fusil Fx',
-        modelSrc: 'fusil_fx.glb?v=5',
+        modelSrc: 'fusil_fx.glb?v=6',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -87,7 +87,7 @@ const proceduresData = {
     },
     'procedure-2': {
         title: 'AR-15',
-        modelSrc: 'ar-15_assault_rifle_fbx.glb?v=5',
+        modelSrc: 'ar-15_assault_rifle_fbx.glb?v=6',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -124,7 +124,7 @@ const proceduresData = {
     },
     'procedure-3': {
         title: 'HKG3',
-        modelSrc: 'hkg3.glb?v=5',
+        modelSrc: 'hkg3.glb?v=6',
         categories: [
             {
                 name: "Desarme 1/er escalón",
@@ -203,7 +203,7 @@ const proceduresData = {
     },
     'procedure-4': {
         title: 'MINIMI MK3',
-        modelSrc: 'Minimi-Mk3-Black.glb?v=5',
+        modelSrc: 'Minimi-Mk3-Black.glb?v=6',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -240,7 +240,7 @@ const proceduresData = {
     },
     'procedure-5': {
         title: 'MK19',
-        modelSrc: 'MK19.glb?v=5',
+        modelSrc: 'MK19.glb?v=6',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -421,9 +421,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modal para PDFs
     const pdfModal = document.getElementById('pdf-modal');
-    const pdfViewer = document.getElementById('pdf-viewer');
     const btnClosePdf = document.getElementById('btn-close-pdf');
     const pdfModalTitle = document.getElementById('pdf-modal-title');
+    
+    // Configuración PDF.js
+    let pdfDoc = null,
+        pageNum = 1,
+        pageIsRendering = false,
+        pageNumIsPending = null;
+
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const renderPage = num => {
+        pageIsRendering = true;
+        pdfDoc.getPage(num).then(page => {
+            // Escala adaptativa simple: si la pantalla es muy ancha, aumentar resolución
+            const scale = window.innerWidth > 768 ? 1.5 : 1.0; 
+            const viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderCtx = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+            page.render(renderCtx).promise.then(() => {
+                pageIsRendering = false;
+                if (pageNumIsPending !== null) {
+                    renderPage(pageNumIsPending);
+                    pageNumIsPending = null;
+                }
+            });
+
+            document.getElementById('pdf-page-num').textContent = num;
+            document.getElementById('pdf-prev').disabled = num <= 1;
+            document.getElementById('pdf-next').disabled = num >= pdfDoc.numPages;
+        });
+    };
+
+    const queueRenderPage = num => {
+        if (pageIsRendering) {
+            pageNumIsPending = num;
+        } else {
+            renderPage(num);
+        }
+    };
+
+    const onPrevPage = () => {
+        if (pageNum <= 1) return;
+        pageNum--;
+        queueRenderPage(pageNum);
+    };
+
+    const onNextPage = () => {
+        if (pageNum >= pdfDoc.numPages) return;
+        pageNum++;
+        queueRenderPage(pageNum);
+    };
+
+    document.getElementById('pdf-prev').addEventListener('click', onPrevPage);
+    document.getElementById('pdf-next').addEventListener('click', onNextPage);
 
     // Modal para Videos
     const videoModal = document.getElementById('video-modal');
@@ -446,7 +505,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoViewer.play().catch(e => console.log('Auto-play prevent:', e));
             } else {
                 pdfModalTitle.textContent = title;
-                pdfViewer.src = encodedSrc;
+                
+                // Cargar documento con PDF.js
+                pdfjsLib.getDocument(encodedSrc).promise.then(pdfDoc_ => {
+                    pdfDoc = pdfDoc_;
+                    document.getElementById('pdf-page-count').textContent = pdfDoc.numPages;
+                    pageNum = 1;
+                    renderPage(pageNum);
+                }).catch(err => {
+                    console.error("Error al cargar PDF: ", err);
+                    alert("No se pudo cargar el documento para visualizarlo. Puede usar el botón de descargar.");
+                });
 
                 let extBtn = document.getElementById('btn-external-pdf');
                 if (!extBtn) {
@@ -471,7 +540,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btnClosePdf.addEventListener('click', () => {
         pdfModal.classList.remove('active');
         setTimeout(() => {
-            pdfViewer.src = '';
+            if (ctx && canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
         }, 300);
     });
 
