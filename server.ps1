@@ -36,6 +36,7 @@ try {
                     ".jpg"  { $response.ContentType = "image/jpeg" }
                     ".pdf"  { $response.ContentType = "application/pdf" }
                     ".mp4"  { $response.ContentType = "video/mp4" }
+                    ".glb"  { $response.ContentType = "model/gltf-binary" }
                     default { $response.ContentType = "application/octet-stream" }
                 }
                 

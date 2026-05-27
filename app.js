@@ -331,6 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.menu-card').forEach(card => {
         card.addEventListener('click', () => {
             const procedureId = card.getAttribute('data-target');
+            if (!procedureId) return; // No es una tarjeta de procedimiento
             loadProcedure(procedureId);
             
             // Animación de transición
@@ -338,6 +339,23 @@ document.addEventListener('DOMContentLoaded', () => {
             screenMenu.classList.add('left-screen');
             screenProcedure.classList.add('active-screen');
         });
+    });
+
+    // Navegación hacia Material Adicional
+    const screenMaterials = document.getElementById('screen-materials');
+    const btnGoMaterials = document.getElementById('btn-go-materials');
+    const btnBackMaterials = document.getElementById('btn-back-materials');
+
+    btnGoMaterials.addEventListener('click', () => {
+        screenMenu.classList.remove('active-screen');
+        screenMenu.classList.add('left-screen');
+        screenMaterials.classList.add('active-screen');
+    });
+
+    btnBackMaterials.addEventListener('click', () => {
+        screenMaterials.classList.remove('active-screen');
+        screenMenu.classList.remove('left-screen');
+        screenMenu.classList.add('active-screen');
     });
 
     // Navegación Volver
@@ -407,32 +425,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnClosePdf = document.getElementById('btn-close-pdf');
     const pdfModalTitle = document.getElementById('pdf-modal-title');
 
-    document.querySelectorAll('.material-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Evitar comportamiento predeterminado
-            const pdfUrl = encodeURI(link.getAttribute('href'));
-            const title = link.textContent.trim();
-            
-            pdfModalTitle.textContent = title;
-            pdfViewer.src = pdfUrl;
-            
-    // Botón de fallback para móviles que no soportan iframe PDF
-            let extBtn = document.getElementById('btn-external-pdf');
-            if (!extBtn) {
-                extBtn = document.createElement('a');
-                extBtn.id = 'btn-external-pdf';
-                extBtn.className = 'btn-close-pdf'; // Reusar estilo
-                extBtn.style.width = 'auto';
-                extBtn.style.padding = '0 10px';
-                extBtn.style.fontSize = '14px';
-                extBtn.style.textDecoration = 'none';
-                extBtn.innerHTML = 'Abrir ↗';
-                extBtn.target = '_blank';
-                document.querySelector('#pdf-modal .pdf-modal-header').insertBefore(extBtn, btnClosePdf);
-            }
-            extBtn.href = pdfUrl;
+    // Modal para Videos
+    const videoModal = document.getElementById('video-modal');
+    const videoViewer = document.getElementById('video-viewer');
+    const btnCloseVideo = document.getElementById('btn-close-video');
+    const videoModalTitle = document.getElementById('video-modal-title');
 
-            pdfModal.classList.add('active');
+    // Modal para PDFs y Videos desde pantalla de Material Adicional
+    document.querySelectorAll('.mat-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const src = item.getAttribute('data-src');
+            const type = item.getAttribute('data-type');
+            const title = item.getAttribute('data-title');
+            const encodedSrc = encodeURI(src);
+
+            if (type === 'video') {
+                videoModalTitle.textContent = title;
+                videoViewer.src = encodedSrc;
+                videoModal.classList.add('active');
+                videoViewer.play().catch(e => console.log('Auto-play prevent:', e));
+            } else {
+                pdfModalTitle.textContent = title;
+                pdfViewer.src = encodedSrc;
+
+                let extBtn = document.getElementById('btn-external-pdf');
+                if (!extBtn) {
+                    extBtn = document.createElement('a');
+                    extBtn.id = 'btn-external-pdf';
+                    extBtn.className = 'btn-close-pdf';
+                    extBtn.style.width = 'auto';
+                    extBtn.style.padding = '0 10px';
+                    extBtn.style.fontSize = '14px';
+                    extBtn.style.textDecoration = 'none';
+                    extBtn.innerHTML = 'Descargar ⬇';
+                    extBtn.target = '_blank';
+                    document.querySelector('#pdf-modal .pdf-modal-header').insertBefore(extBtn, btnClosePdf);
+                }
+                extBtn.href = encodedSrc;
+                extBtn.setAttribute('download', title || 'documento');
+                pdfModal.classList.add('active');
+            }
         });
     });
 
@@ -443,26 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // Modal para Videos
-    const videoModal = document.getElementById('video-modal');
-    const videoViewer = document.getElementById('video-viewer');
-    const btnCloseVideo = document.getElementById('btn-close-video');
-    const videoModalTitle = document.getElementById('video-modal-title');
 
-    document.querySelectorAll('.video-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            e.stopPropagation(); // Evitar que el evento dispare el del PDF si se mezclan
-            
-            const videoUrl = encodeURI(link.getAttribute('href'));
-            const title = link.textContent.trim();
-            
-            videoModalTitle.textContent = title;
-            videoViewer.src = videoUrl;
-            videoModal.classList.add('active');
-            videoViewer.play().catch(e => console.log('Auto-play prevent:', e));
-        });
-    });
+
 
     btnCloseVideo.addEventListener('click', () => {
         videoModal.classList.remove('active');
