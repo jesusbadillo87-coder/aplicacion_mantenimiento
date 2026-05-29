@@ -384,8 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
         viewer3D.removeAttribute("camera-orbit"); // Reset native framing
 
         // Retrasamos la inyección del Modelo 3D para que NO congele la animación de transición CSS
+        // Se añade ?v=2 para forzar descarga nueva y evitar que el navegador sirva el puntero LFS cacheado
         setTimeout(() => {
-            viewer3D.src = data.modelSrc;
+            viewer3D.src = data.modelSrc + '?v=2';
         }, 350); 
 
         // Render Panel Steps
