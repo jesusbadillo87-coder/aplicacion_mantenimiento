@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v13';
+const CACHE_NAME = 'maint3d-v14';
 const urlsToCache = [
   './',
   './index.html',
@@ -44,8 +44,11 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
   // EXCLUSIÓN: No cachear modelos 3D, videos ni PDFs pesados para evitar errores de memoria en el móvil
+  // IMPORTANTE: Se usa event.respondWith(fetch(...)) en lugar de un return vacío,
+  // para que el Service Worker no bloquee silenciosamente la petición en algunos navegadores.
   if (url.pathname.endsWith('.glb') || url.pathname.endsWith('.pdf') || url.pathname.endsWith('.zip') || url.pathname.endsWith('.mp4')) {
-    return; // Dejar que el navegador lo maneje normalmente (Network Only)
+    event.respondWith(fetch(event.request)); // Network Only — nunca cache
+    return;
   }
 
   event.respondWith(

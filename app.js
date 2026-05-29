@@ -502,7 +502,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const src = item.getAttribute('data-src');
             const type = item.getAttribute('data-type');
             const title = item.getAttribute('data-title');
-            const encodedSrc = src; // Remover encodeURI ya que pdfjs maneja internamente la URL y podría causar un doble encode (404) en GitHub Pages.
+            // Codificar correctamente el nombre del archivo para manejar espacios y caracteres especiales
+            // Se codifica solo el nombre del archivo, NO la ruta completa, para evitar doble encode
+            const encodedSrc = src.split('/').map(part => encodeURIComponent(part)).join('/');
             if (type === 'video') {
                 videoModalTitle.textContent = title;
                 videoViewer.src = encodedSrc;
@@ -511,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 pdfModalTitle.textContent = title;
                 
-                // Cargar documento con PDF.js
+                // Cargar documento con PDF.js usando el src original (PDF.js maneja la URL internamente)
                 pdfjsLib.getDocument(encodedSrc).promise.then(pdfDoc_ => {
                     pdfDoc = pdfDoc_;
                     document.getElementById('pdf-page-count').textContent = pdfDoc.numPages;
