@@ -327,6 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const procDetails = document.getElementById('proc-details');
     const btnBack = document.getElementById('btn-back');
 
+    // Manejo de errores en el visor 3D
+    viewer3D.addEventListener('error', (error) => {
+        console.error('Error cargando modelo 3D:', error);
+        alert('Ocurrió un error al cargar el modelo 3D. Asegúrate de que los archivos .glb estén subidos al servidor.');
+    });
+
     // Navegación hacia Procedimiento
     document.querySelectorAll('.menu-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -496,8 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const src = item.getAttribute('data-src');
             const type = item.getAttribute('data-type');
             const title = item.getAttribute('data-title');
-            const encodedSrc = encodeURI(src);
-
+            const encodedSrc = src; // Remover encodeURI ya que pdfjs maneja internamente la URL y podría causar un doble encode (404) en GitHub Pages.
             if (type === 'video') {
                 videoModalTitle.textContent = title;
                 videoViewer.src = encodedSrc;
@@ -514,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderPage(pageNum);
                 }).catch(err => {
                     console.error("Error al cargar PDF: ", err);
-                    alert("No se pudo cargar el documento para visualizarlo. Puede usar el botón de descargar.");
+                    alert("No se pudo cargar el documento para visualizarlo. Detalle: " + (err.message || err) + "\n\nPuede usar el botón de descargar.");
                 });
 
                 let extBtn = document.getElementById('btn-external-pdf');
