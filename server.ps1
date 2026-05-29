@@ -24,6 +24,11 @@ try {
             if (Test-Path $filePath -PathType Leaf) {
                 $content = [System.IO.File]::ReadAllBytes($filePath)
                 $response.ContentLength64 = $content.Length
+
+                # Headers de seguridad para SharedArrayBuffer (requerido por KTX2/basisu transcoder)
+                $response.AddHeader("Cross-Origin-Opener-Policy", "same-origin")
+                $response.AddHeader("Cross-Origin-Embedder-Policy", "require-corp")
+                $response.AddHeader("Cross-Origin-Resource-Policy", "cross-origin")
                 
                 # Simple MIME type checking
                 $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
