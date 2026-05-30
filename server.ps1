@@ -26,9 +26,9 @@ try {
                 $response.ContentLength64 = $content.Length
 
                 # Headers de seguridad para SharedArrayBuffer (requerido por KTX2/basisu transcoder)
-                $response.AddHeader("Cross-Origin-Opener-Policy", "same-origin")
-                $response.AddHeader("Cross-Origin-Embedder-Policy", "require-corp")
-                $response.AddHeader("Cross-Origin-Resource-Policy", "cross-origin")
+                # $response.AddHeader("Cross-Origin-Opener-Policy", "same-origin")
+                # $response.AddHeader("Cross-Origin-Embedder-Policy", "require-corp")
+                # $response.AddHeader("Cross-Origin-Resource-Policy", "cross-origin")
                 
                 # Simple MIME type checking
                 $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
