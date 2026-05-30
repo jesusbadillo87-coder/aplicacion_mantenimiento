@@ -87,7 +87,7 @@ const proceduresData = {
     },
     'procedure-2': {
         title: 'AR-15',
-        modelSrc: 'ar-15_assault_rifle_fbx.glb',
+        modelSrc: 'AR15-glb.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -384,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
         viewer3D.removeAttribute("camera-orbit"); // Reset native framing
 
         // Retrasamos la inyección del Modelo 3D para que NO congele la animación de transición CSS
-        // Se añade ?v=2 para forzar descarga nueva y evitar que el navegador sirva el puntero LFS cacheado
+        // Se añade ?v=3 para forzar descarga nueva y evitar que el navegador sirva el puntero LFS cacheado
         setTimeout(() => {
-            viewer3D.src = data.modelSrc + '?v=2';
+            viewer3D.src = data.modelSrc + '?v=3';
         }, 350); 
 
         // Render Panel Steps

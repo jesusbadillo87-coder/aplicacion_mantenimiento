@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maint3d-v15';
+const CACHE_NAME = 'maint3d-v16';
 const urlsToCache = [
   './',
   './index.html',
