@@ -2,7 +2,7 @@
 const proceduresData = {
     'procedure-1': {
         title: 'Fusil Fx',
-        modelSrc: 'fusil_fx.glb',
+        modelSrc: 'fx-05_xiuhcoat_assault_rifle.glb',
         categories: [
             {
                 name: "Desarme 1/er. Escalón",
@@ -384,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
         viewer3D.removeAttribute("camera-orbit"); // Reset native framing
 
         // Retrasamos la inyección del Modelo 3D para que NO congele la animación de transición CSS
-        // Se añade ?v=3 para forzar descarga nueva y evitar que el navegador sirva el puntero LFS cacheado
+        // Se añade ?v=4 para forzar descarga nueva y evitar que el navegador sirva el puntero LFS cacheado
         setTimeout(() => {
-            viewer3D.src = data.modelSrc + '?v=3';
+            viewer3D.src = data.modelSrc + '?v=4';
         }, 350); 
 
         // Render Panel Steps
