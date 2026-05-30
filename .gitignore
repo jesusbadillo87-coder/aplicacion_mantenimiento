@@ -75,3 +75,6 @@ Thumbs.db
 
 # Videos (pendientes de comprimir)
 *.mp4
+
+*.zip
+*.bak
